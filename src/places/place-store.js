@@ -28,31 +28,6 @@ const places = writable([
 
 const placeStore = {
   subscribe: places.subscribe,
-  setPlaces: placesArray => {
-    places.set(placesArray);
-  },
-  addPlaces: placesData => {
-    const newPlace = {
-      ...placesData
-    };
-    places.update(items => {
-      return [newPlace, ...items];
-    });
-  },
-  updatePlace: (id, place) => {
-    places.update(items => {
-      const placesIndex = items.findIndex(i => i.id === id);
-      const updatedPlace = { ...items[placesIndex], ...place };
-      const updatedPlaces = [...items];
-      updatedPlaces[placesIndex] = updatedPlace;
-      return updatedPlaces;
-    });
-  },
-  removePlace: id => {
-    places.update(items => {
-      return items.filter(i => i.id !== id);
-    });
-  },
   toggleFavorite: id => {
     places.update(items => {
       const updatedPlace = { ...items.find(m => m.id === id) };
